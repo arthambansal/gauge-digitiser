@@ -295,11 +295,15 @@ Over the whole dial, lighting varies, so each pixel is compared with its local m
 number crop, lighting is roughly uniform and the histogram is bimodal (ink vs. face). Otsu picks the
 threshold between those two peaks automatically.
 
-**Bonus – why does the online version take photos instead of live video?**
-A deployed Streamlit app runs on a remote server. `cv2.VideoCapture(0)` there opens the *server's* camera, which doesn't
-exist. Live video from the visitor's browser would need WebRTC (`streamlit-webrtc`), with heavy native dependencies and
-network problems behind firewalls. `st.camera_input` sends one photo from the browser, which the same pipeline reads.
-It's reliable on laptops and phones. Locally, where the camera is on the same machine, the OpenCV live loop is kept.
+**Bonus – how does live camera work online, and why not WebRTC?**
+A deployed Streamlit app runs on a remote server, so `cv2.VideoCapture(0)` there opens the *server's* camera, which doesn't
+exist. WebRTC (`streamlit-webrtc`) can stream the visitor's camera, but I tried it and it failed on Streamlit Cloud with
+"connection failed": peer-to-peer video needs a TURN relay server on many networks, and I don't have one. So the browser
+shows the camera itself (JavaScript `getUserMedia`) and sends a small JPEG snapshot to the server about 5 times a second over
+the normal app connection. The server runs the same `read_gauge()` on it and returns the dial centre, radius, needle tip and
+reading; the browser draws them on the live video. Only one snapshot is in flight at a time, so latency can't build up.
+Cost: online it gives about 2–4 readings a second (round trip), versus about 10 locally; the drawn needle lags fast movement.
+For a continuous webcam on the server's own machine, the OpenCV capture loop is kept as the local option.
 
 **Bonus – what does "confidence" mean?**
 `1 − (best competing score in a different direction) / (needle score)`. 1.0 means nothing else in the dial looked like

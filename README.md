@@ -26,14 +26,15 @@ Non-technical guide with screenshots: **`FEATURES_GUIDE.docx`**. Viva preparatio
 - **Result card**: a downloadable PNG of the annotated gauge with the reading, status and time.
 - **Batch**: read many photos at once → table with thumbnails → CSV.
 - **History**: every reading this session, a trend chart with the safe band, out-of-range events, CSV export.
-- **Live camera** (local only): continuous webcam reading, median-smoothed.
+- **Live camera**: your camera shown live with the detected dial circle, needle and reading drawn on it, plus the
+  animated dial readout. Works **online and on phones** (browser camera) and locally (webcam or video file).
 
 ## Project layout
 
 | Path | What it is |
 |---|---|
 | `gauge_digitizer/` | **The computer vision.** `preprocess`, `dial` (Hough circles + hub candidates), `needle` (Canny + Hough lines, pivot choice, confidence), `calibrate` (manual + OCR), `alerts`, `utils`, `pipeline.read_gauge()` |
-| `gauge_app/` | **The user interface only.** `theme` (CSS), `readout`, `gallery`, `clickcal`, `history`, `batch`, `card`, `explain`, `live` |
+| `gauge_app/` | **The user interface only.** `theme` (CSS), `readout`, `gallery`, `clickcal`, `history`, `batch`, `card`, `explain`, `live` + `livecam` (the browser-camera component) |
 | `app.py` | Streamlit entry point: arranges the screen, calls `read_gauge()` |
 | `.streamlit/config.toml` | Theme: colours and fonts (Fraunces, DM Sans, DM Mono) |
 | `assets/` | Gallery images (`assets/gallery/` + `gallery.csv`), fonts for the result card (OFL), app icon |
@@ -74,7 +75,9 @@ If you edit files in `gauge_digitizer/` or `gauge_app/` while Streamlit is runni
 4. Pick **Fire-sprinkler gauge** (a real photo) → **Side by side**. Then **Click to calibrate** and click the 0 and
    300 ticks to show calibration from scratch.
 5. Drag the **Safe range** so the reading turns red, then open **History**: the event is listed and can be exported.
-6. **Live camera** (local): source `synthetic/sweep.mp4` → Start. The needle sweeps 0 → 100 and the lamp goes
+6. **Live camera → Browser camera → Start camera.** Hold up a gauge (or show a gauge picture on a phone): the brass circle and
+   red needle line are drawn on the live video and the dial follows. For a repeatable demo without a gauge, pick
+   **This computer / video file** (local only) and use `synthetic/sweep.mp4`: the needle sweeps 0 → 100 and the lamp goes
    green → amber → red.
 
 ## Deploy to Streamlit Community Cloud
@@ -100,14 +103,19 @@ If you edit files in `gauge_digitizer/` or `gauge_app/` while Streamlit is runni
 | Samples, upload, batch, history, result card, explain, click-to-calibrate | ✅ | ✅ |
 | Camera **snapshot** (browser camera, phones included) | ✅ | ✅ |
 | Automatic (OCR) calibration | ✅ (Tesseract from `packages.txt`) | ✅ if Tesseract is installed |
-| **Live camera** (continuous) | ❌ hidden: the server has no camera | ✅ |
+| **Live camera, browser camera** (lines drawn on the live video) | ✅ about 2–4 updates a second | ✅ about 10 a second |
+| Live camera, webcam on the server / video file | ❌ hidden: the server has no camera | ✅ |
 | History, saved calibrations | per browser tab, gone when closed (download CSV / JSON to keep) | same |
 
-**Why snapshots online instead of live video.** A deployed Streamlit app runs on a remote server, so
-`cv2.VideoCapture(0)` there finds no camera. Live video from the visitor's browser would need `streamlit-webrtc`.
-That adds heavy native dependencies (`aiortc`, `av`) and often fails behind firewalls without a TURN server.
-`st.camera_input` (one photo at a time) works reliably everywhere, including phones. The local live loop is kept
-for laptop demos.
+**How the online live camera works (and why not WebRTC).** A deployed app runs on a remote server, so
+`cv2.VideoCapture(0)` there would open the *server's* camera, which doesn't exist. The usual fix is WebRTC
+(`streamlit-webrtc`), which streams the camera to the server as video. I built that first and it **failed on Streamlit
+Community Cloud** ("connection failed"): WebRTC needs a TURN relay server on many networks, and the app has none.
+Instead, `gauge_app/livecam.py` is a small component that shows the camera in the browser and sends a 640 px JPEG snapshot
+over the app's normal connection, about 5 times a second. Each snapshot is read by the same `read_gauge()` pipeline, and the
+dial circle, needle and reading come back and are drawn over the live video. A new snapshot is sent only when the last one has
+been answered, so a slow connection never builds up a queue. Nothing is stored. Trade-off: online it updates a few times a
+second, and the drawn needle trails fast movement slightly (each drawing comes from the latest answered snapshot).
 
 ## Measured results (`python evaluate.py`)
 
@@ -192,7 +200,7 @@ further is more labelled real photos.**
 
 ## Known limitations
 
-- **Online:** no continuous live video (snapshots only); history and saved calibrations last only as long as the browser tab.
+- **Online:** the live camera updates about 2–4 times a second and the drawn lines lag fast needle movement slightly; history and saved calibrations last only as long as the browser tab.
 - **Small real test set.** 12 photos with labels read by eye. The real-photo numbers indicate performance;
   they are not precise accuracy figures.
 - **Camera tilt.** The dial is modelled as a circle; an off-axis view makes it an ellipse. Detecting

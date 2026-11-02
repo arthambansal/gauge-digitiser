@@ -166,7 +166,7 @@ h1, h2, h3 { letter-spacing: -0.01em; }
             color: @MUTED@; margin: 0 0 .4rem 0; }
 
 /* ===================== the instrument readout ===================== */
-.gd-readout { --status: #8A8070; position: relative; overflow: hidden; color: @CREAM@; border-radius: 12px;
+.gd-readout { --status: #8A8070; position: relative; overflow: hidden; container-type: inline-size; color: @CREAM@; border-radius: 12px;
   padding: 1rem 1.2rem 1.05rem 1.2rem; border: 1px solid rgba(176,141,87,.6);
   background: radial-gradient(120% 90% at 50% 0%, #34503F 0%, #24392F 46%, #18261F 100%);
   box-shadow: 0 0 0 4px rgba(176,141,87,.15), 0 22px 40px -22px rgba(20,30,25,.85),
@@ -177,10 +177,12 @@ h1, h2, h3 { letter-spacing: -0.01em; }
 .gd-readout::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--status);
   box-shadow: 0 0 18px var(--status); }
 .gd-s-red { animation: gd-alarm 1.5s ease-in-out infinite; }
-.gd-head { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
+.gd-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .3rem .8rem;
+           position: relative; z-index: 1; }
 .gd-k { font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: @BRASSP@; }
 .gd-k-status { display: inline-flex; align-items: center; gap: .5rem; color: @CREAM@; letter-spacing: .08em;
-               font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: .82rem; text-transform: none; }
+               font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: .82rem; text-transform: none;
+               white-space: nowrap; }
 .gd-lamp { width: .72rem; height: .72rem; border-radius: 50%; background: var(--status);
            box-shadow: 0 0 0 3px rgba(0,0,0,.25), 0 0 12px var(--status); animation: gd-breathe 3.2s ease-in-out infinite; }
 .gd-s-red .gd-lamp, .gd-s-amber .gd-lamp { animation-duration: 1.3s; }
@@ -193,7 +195,7 @@ h1, h2, h3 { letter-spacing: -0.01em; }
              animation: gd-sweep 1.6s .15s cubic-bezier(.34,1.35,.5,1) backwards;
              filter: drop-shadow(0 4px 4px rgba(0,0,0,.55)); }
 .gd-value { position: relative; z-index: 1; font-family: 'DM Mono', monospace; font-weight: 500; text-align: center;
-            font-size: clamp(2.7rem, 5.6vw, 4.1rem); line-height: 1.05; letter-spacing: -0.03em; margin: -.35rem 0 .1rem 0;
+            font-size: clamp(1.9rem, 18cqi, 4.1rem); line-height: 1.05; white-space: nowrap; letter-spacing: -0.03em; margin: -.35rem 0 .1rem 0;
             color: #FFF8E8; text-shadow: 0 0 26px color-mix(in srgb, var(--status) 60%, transparent); }
 .gd-unit { font-size: 1.05rem; color: @BRASSP@; margin-left: .4rem; letter-spacing: .02em; text-shadow: none; }
 .gd-count { transition: --t var(--dur, 1.1s) cubic-bezier(.2,.8,.2,1);

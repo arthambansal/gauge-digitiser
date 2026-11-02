@@ -1,0 +1,13 @@
+filename,true_value,scale_type,dial_found,needle_found,detected_angle,true_angle,angle_err_deg,manual_value,manual_err_pct,auto_ok,auto_mode,auto_value,auto_err_pct,time_ms_no_ocr,variant
+real_astralpool_3bar.jpg,0.0,linear,True,True,52.53,45.0,7.53,0.084,2.789,False,,,,27.3,real
+real_budenberg_lbs.jpg,1.0,linear,True,True,56.48,55.41,1.07,1.122,0.408,False,,,,24.6,real
+real_manometer_15kp.jpg,0.4,linear,True,True,41.7,43.7,2.0,0.29,0.731,False,,,,11.3,real
+real_maximator_2500bar.jpg,870.0,linear,True,True,142.5,136.94,5.56,920.934,2.037,False,,,,33.6,real
+real_sprinkler_300psi.jpg,110.0,linear,True,True,141.79,142.5,0.71,109.197,0.268,False,,,,92.4,real
+real_tyre_gauge_4p5bar.jpg,0.4,linear,True,True,35.16,25.84,9.32,0.53,3.254,True,auto-linear,0.571,4.263,11.8,real
+real_usg_4000psi.jpg,850.0,linear,True,True,99.93,99.18,0.75,860.851,0.271,True,auto-linear,844.107,0.147,69.9,real
+real_vdo_oil_10bar.jpg,0.0,linear,True,True,46.33,40.2,6.13,0.22,2.199,False,,,,20.6,real
+real_wall_gauge_60.jpg,22.0,linear,True,True,137.92,141.61,3.69,21.172,1.379,False,,,,24.2,real
+real_wika_4000psi.jpg,0.0,linear,True,True,66.71,62.9,3.81,55.49,1.387,False,,,,57.5,real
+real_wika_600bar.jpg,0.0,linear,True,True,105.64,103.9,1.74,0.384,0.64,False,,,,30.4,real
+real_wika_minicheck_15psi.jpg,0.0,linear,True,True,44.97,35.5,9.47,0.512,3.411,False,,,,20.5,real

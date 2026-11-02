@@ -1,0 +1,10 @@
+# Pinned versions, tested together (Python 3.12-3.14).
+# opencv-python-headless: same OpenCV without GUI libraries - what a server needs.
+opencv-python-headless==5.0.0.93
+numpy==2.5.4
+pandas==3.1.0
+pillow==13.0.0
+pytesseract==0.3.13
+streamlit==1.66.1
+streamlit-image-coordinates==0.4.1
+altair==6.3.0

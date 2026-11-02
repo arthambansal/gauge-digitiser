@@ -1,0 +1,2 @@
+filename,true_value,scale_min,scale_max,min_angle,sweep,scale_type,variant
+my_gauge_01.jpg,4.2,0,10,45,270,linear,real

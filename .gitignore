@@ -1,0 +1,17 @@
+# Python / tools
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.claude/
+
+# Generated data (recreate with: python make_synthetic.py --video ; python make_synthetic.py --realistic)
+synthetic/
+synthetic_realistic/
+
+# Runtime output and personal / course files
+alerts_log.csv
+calibrations/
+*.docx
+!FEATURES_GUIDE.docx
+*.pdf

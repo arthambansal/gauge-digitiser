@@ -1,0 +1,7 @@
+filename,title,unit,true_value,scale_min,scale_max,min_angle,sweep,scale_type,note
+pressure_0-100psi.png,"Pressure gauge, 0–100 psi",psi,76.3,0,100,45.0,270.0,linear,Clean synthetic gauge
+flowmeter_sqrt_scale.png,Flow meter (non-linear scale),L/min,36.452,0,100,45.0,270.0,sqrt,Square-root scale: try Automatic (OCR) calibration
+pressure_0-10bar_glare.png,Pressure gauge with glare,bar,1.314,0,10,45.0,270.0,linear,Reflection on the glass
+thermometer_dark_face.png,"Thermometer, dark face",°C,44.533,0,160,43.61,268.47,linear,"White print on black, slightly blurred"
+thermometer_dual_scale.png,Dual-scale thermometer,°C,75.324,0,160,96.29,262.23,linear,Two scales: OCR must pick the right one
+pressure_dual_scale_uneven_light.png,"Pressure gauge, uneven light",bar,5.717,0,10,40.14,290.21,linear,Light falls off across the dial

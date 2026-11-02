@@ -1,0 +1,38 @@
+# Visual identity: "warm analogue instrument cabinet"
+# cream dial-face, brass trim, oxblood accent, bottle green; Fraunces / DM Sans / DM Mono.
+# Extra styling (readout, filmstrip, gallery) lives in gauge_app/theme.py.
+
+[theme]
+base = "light"
+primaryColor = "#7A1F1F"              # oxblood: buttons, active widgets
+backgroundColor = "#F4EBD9"           # cream dial-face
+secondaryBackgroundColor = "#EADCC2"  # darker cream: sidebar, inputs
+textColor = "#2B261F"                 # warm near-black ink
+linkColor = "#7A1F1F"
+borderColor = "#CDB98F"               # pale brass hairlines
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "4px"
+buttonRadius = "3px"
+font = "DM Sans:https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap"
+headingFont = "Fraunces:https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+codeFont = "DM Mono:https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap"
+headingFontWeights = [600, 600, 550, 550, 500, 500]
+codeBackgroundColor = "#EADCC2"
+dataframeHeaderBackgroundColor = "#E5D5B6"
+chartCategoricalColors = ["#7A1F1F", "#24392F", "#B08D57", "#5B6B73", "#C98A1B"]
+greenColor = "#2F6B4F"
+orangeColor = "#B9771A"
+redColor = "#9E2A2B"
+
+[theme.sidebar]
+backgroundColor = "#EADCC2"
+
+[client]
+toolbarMode = "minimal"
+
+[browser]
+gatherUsageStats = false
+
+[server]
+maxUploadSize = 25

@@ -1,0 +1,13 @@
+filename,true_value,scale_min,scale_max,min_angle,sweep,scale_type,variant,label_uncertainty,label_uncertainty_pctFS,note,title,unit
+real_astralpool_3bar.jpg,0.0,0,3,45.0,270.0,linear,real,0.05,1.7,at rest on stop pin,Pool filter gauge,bar
+real_budenberg_lbs.jpg,1.0,0,30,46.7,261.4,linear,real,1.0,3.3,"at rest; old gauge, eccentric scale","Budenberg, 1960s",psi
+real_manometer_15kp.jpg,0.4,0,15,36.4,273.8,linear,real,0.4,2.7,at rest,Swedish manometer,kgf/cm²
+real_maximator_2500bar.jpg,870,0,2500,41.9,273.1,linear,real,25,1.0,tilted view; cross-checked with psi scale,High-pressure gauge (tilted),bar
+real_sprinkler_300psi.jpg,110,0,300,45.0,265.9,linear,real,3,1.0,outdoor; cross-checked with kPa scale,Fire-sprinkler gauge,psi
+real_tyre_gauge_4p5bar.jpg,0.4,0.5,4.5,33.0,286.5,linear,real,0.1,2.5,at rest below scale start; red needle,Tyre-pressure gauge,bar
+real_usg_4000psi.jpg,850,0,4000,40.4,276.6,linear,real,30,0.8,dial cropped by frame; cross-checked with kPa scale,Gas regulator gauge,psi
+real_vdo_oil_10bar.jpg,0.0,0,10,40.2,278.6,linear,real,0.2,2.0,"dark face, white needle; at rest",Car oil-pressure gauge,bar
+real_wall_gauge_60.jpg,22,0,60,43.6,267.3,linear,real,1.5,2.5,dual scale psi + kg/cm2,Wall-mounted gauge,psi
+real_wika_4000psi.jpg,0,0,4000,62.9,274.7,linear,real,60,1.5,at rest on stop pin,WIKA 4000 psi,psi
+real_wika_600bar.jpg,0.0,0,60,103.9,271.7,linear,real,0.5,0.8,MPa scale; scale starts upper-left; at rest,WIKA 60 MPa,MPa
+real_wika_minicheck_15psi.jpg,0.0,0,15,35.5,277.7,linear,real,0.5,3.3,at rest; dial partly cut by frame,WIKA Minicheck,psi

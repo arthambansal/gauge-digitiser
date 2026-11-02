@@ -26,7 +26,14 @@ orangeColor = "#B9771A"
 redColor = "#9E2A2B"
 
 [theme.sidebar]
-backgroundColor = "#EADCC2"
+# dark "control panel": bottle green with brass and amber accents
+backgroundColor = "#1F3029"
+secondaryBackgroundColor = "#2B3F35"
+textColor = "#F0E6D0"
+primaryColor = "#E0A63A"
+borderColor = "#4A6356"
+linkColor = "#E0A63A"
+codeBackgroundColor = "#2B3F35"
 
 [client]
 toolbarMode = "minimal"

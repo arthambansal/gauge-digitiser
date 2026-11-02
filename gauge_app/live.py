@@ -69,13 +69,13 @@ def live_page(cfg):
                 res["colour"], res["dial"], res["needle"], rim=res["rim"],
                 circle_colour=BGR["brass"], needle_colour=BGR["oxblood"])
             frame_ph.image(shown, channels="BGR", width="stretch")
-            with readout_ph.container():
-                st.markdown(readout_html(value, cfg["unit"], status, cfg["scale_min"], cfg["scale_max"],
-                                         cfg["safe_low"], cfg["safe_high"], cfg["margin"]), unsafe_allow_html=True)
-                raw = "–" if res["value"] is None else f"{res['value']:.2f}"
-                st.markdown(details_html([("Frames per second", f"{frames / (time.time() - t0):.1f}"),
-                                          ("This frame (raw)", raw),
-                                          ("Confidence", f"{res['confidence'] * 100:.0f}%")]),
-                            unsafe_allow_html=True)
+            # One markdown element updated in place every frame, so the needle glides instead of re-sweeping
+            raw = "–" if res["value"] is None else f"{res['value']:.2f}"
+            readout_ph.markdown(
+                readout_html(value, cfg["unit"], status, cfg["scale_min"], cfg["scale_max"], cfg["safe_low"],
+                             cfg["safe_high"], cfg["margin"], live=True)
+                + details_html([("Frames per second", f"{frames / (time.time() - t0):.1f}"),
+                                ("This frame (raw)", raw), ("Confidence", f"{res['confidence'] * 100:.0f}%")]),
+                unsafe_allow_html=True)
     finally:
         cap.release()

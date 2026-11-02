@@ -10,7 +10,8 @@ Views:
   Read a gauge : sample gallery / upload a photo / browser camera snapshot
   Batch        : many photos at once -> results table + CSV
   History      : every reading this session, trend chart, alerts, CSV export
-  Live camera  : continuous reading from a local webcam (hidden on the online version)
+  Live camera  : continuous reading with the detected lines drawn on the live video
+                 (browser camera via WebRTC, works online; local webcam / video file when run locally)
 """
 
 import dataclasses
@@ -177,7 +178,8 @@ def sidebar():
     safe_low, safe_high = ss.safe_range
     return {"settings": s, "calibration": calibration_from_min_max(lo, hi, ss.cal_min_angle, ss.cal_sweep),
             "auto": ss.cal_mode == "Automatic (OCR)", "unit": ss.cal_unit.strip(), "scale_min": lo, "scale_max": hi,
-            "safe_low": safe_low, "safe_high": safe_high, "margin": ss.margin_pct / 100, "min_conf": ss.min_conf}
+            "safe_low": safe_low, "safe_high": safe_high, "margin": ss.margin_pct / 100, "min_conf": ss.min_conf,
+            "on_cloud": ON_CLOUD}
 
 
 def current_calibration_dict():
@@ -408,7 +410,7 @@ def main():
     note = "Hough circles · Canny edges · Hough lines<br>no deep learning"
     masthead(note)
 
-    views = ["Read a gauge", "Batch", "History"] + ([] if ON_CLOUD else ["Live camera"])
+    views = ["Read a gauge", "Batch", "History", "Live camera"]
     keep_selected("view", "Read a gauge")
     st.segmented_control("View", views, key="view", label_visibility="collapsed")
     cfg = sidebar()

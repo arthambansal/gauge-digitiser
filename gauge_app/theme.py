@@ -240,6 +240,12 @@ h1, h2, h3 { letter-spacing: -0.01em; }
 .st-key-hero [data-testid="stImage"]:hover::after { animation: gd-sheen-hover 1.1s ease-out 1 forwards; }
 .gd-hero-caption { font-family: 'DM Mono', monospace; font-size: .74rem; color: @MUTED@; margin-top: .55rem; }
 
+/* ===================== live camera: the same brass bezel around the video ===================== */
+.st-key-livecam { padding: 17px; border-radius: 12px;
+  background: linear-gradient(145deg, #E8D3A0 0%, #B08D57 36%, #8D6C39 68%, #CDAE72 100%);
+  box-shadow: 0 28px 48px -26px rgba(43,38,31,.7), 0 2px 0 rgba(255,255,255,.55) inset, 0 -2px 0 rgba(60,40,10,.35) inset; }
+.st-key-livecam iframe { border-radius: 4px; background: #1A2922; }
+
 /* ===================== filmstrip, gallery, explain ===================== */
 .gd-stage { font-family: 'DM Mono', monospace; font-size: .7rem; color: @MUTED@; line-height: 1.3; margin-top: .2rem; }
 .gd-stage b { color: @OXB@; font-weight: 500; }
